@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<!-- Landing Page -->
+<div class="hero min-h-screen bg-base-200 py-8">
+    <div class="hero-content flex-col lg:flex-row-reverse px-4 lg:px-8">
+      <img src="https://www.vettimes.co.uk/app/uploads/2016/05/dog-blood-donation_Fotolia_KANDA-EUATHAM.png" class="max-w-full rounded-lg shadow-2xl w-full lg:w-1/2" alt="Blood Donation" />
+      <div class="lg:w-1/2 lg:ml-8">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Welcome to Tails of Hope</h1>
+        <p class="py-4 text-base md:text-lg lg:text-xl">Your contribution can save lives! Join us in our mission to ensure every drop of blood counts. Be a hero by donating blood today.</p>
+        <a href="/donors_login" class="btn btn-primary mt-4">Donate Now</a>
+      </div>
+    </div>
+</div>
+  
+<!-- Mission Section -->
+<section class="bg-base-100 py-8 lg:py-12">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">Our Mission</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div class="card bg-base-200 shadow-md p-4">
+          <div class="card-body">
+            <h3 class="text-lg md:text-xl font-bold mb-2">Save Lives</h3>
+            <p>We strive to ensure a sufficient supply of safe blood and blood products to those in need.</p>
+          </div>
+        </div>
+        <div class="card bg-base-200 shadow-md p-4">
+          <div class="card-body">
+            <h3 class="text-lg md:text-xl font-bold mb-2">Promote Health</h3>
+            <p>Help save furry lives with every donation! Our pet blood donation app connects pet owners and donors to ensure animals in need get the life-saving blood they deserve. Join us in making a difference, one paw at a time.</p>
+          </div>
+        </div>
+        <div class="card bg-base-200 shadow-md p-4">
+          <div class="card-body">
+            <h3 class="text-lg md:text-xl font-bold mb-2">Build Community</h3>
+            <p>We aim to build a supportive community of donors who understand the importance of blood donation for saving animals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+  
+<!-- Call to Action -->
+<section id="request" class="bg-primary text-primary-content py-8 lg:py-12 text-center">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">Request Blood Today!</h2>
+    <p class="mb-4 text-base md:text-lg lg:text-xl">In need of blood? We've got you covered. Request blood today and we'll make sure it reaches you as soon as possible.</p>
+    <!-- Button to open the modal -->
+    <button class="btn btn-secondary btn-lg" onclick="my_modal_1.showModal()">Request Blood</button>
+  </div>
+</section>
+
+<!-- Modal Box with Blood Request Form -->
+<dialog id="my_modal_1" class="modal">
+<div class="modal-box">
+  <h3 class="text-lg font-bold mb-4">Blood Request Form</h3>
+  
+  <form id="blood-request-form" method="POST" action="{% url 'request_blood' %}">
+    <!-- CSRF Token for security if using Django -->
+    {% csrf_token %}
+
+    <!-- First Name -->
+    <div class="form-control mb-4">
+      <label class="label" for="first_name">First Name</label>
+      <input type="text" name="first_name" id="first_name" class="input input-bordered w-full" placeholder="Enter your first name" required>
+    </div>
+
+    <!-- Last Name -->
+    <div class="form-control mb-4">
+      <label class="label" for="last_name">Last Name</label>
+      <input type="text" name="last_name" id="last_name" class="input input-bordered w-full" placeholder="Enter your last name" required>
+    </div>
+
+    <!-- Date of Birth -->
+    <div class="form-control mb-4">
+      <label class="label" for="date_of_birth">Date of Birth</label>
+      <input type="date" name="date_of_birth" id="date_of_birth" class="input input-bordered w-full" required>
+    </div>
+
+    <!-- Gender -->
+    <div class="form-control mb-4">
+      <label class="label" for="gender">Breed Gender</label>
+      <select name="gender" id="gender" class="select select-bordered w-full" required>
+        <option value="">Select your gender</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+
+    <!--weight-->
+<div class="form-control mb-4">
+      <label class="label" for="weight">weight</label>
+      <input type="text" name="weight" id="weight" class="input input-bordered w-full" required>
+    </div>
+
+
+
+
+
+
+
+    <!-- Blood Type -->
+    <div class="form-control mb-4">
+      <label class="label" for="blood_type">Blood Type</label>
+      <select name="blood_type" id="blood_type" class="select select-bordered w-full" required>
+        <option value="">Select your blood type</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+      </select>
+    </div>
+
+    <!-- Volume Required -->
+    <div class="form-control mb-4">
+      <label class="label" for="volume">Volume (in liters)</label>
+      <input type="number" name="volume" id="volume" step="0.1" class="input input-bordered w-full" placeholder="Enter required volume" required>
+    </div>
+
+    <!-- Phone Number -->
+    <div class="form-control mb-4">
+      <label class="label" for="phone_number">Phone Number</label>
+      <input type="tel" name="phone_number" id="phone_number" class="input input-bordered w-full" placeholder="Enter your phone number" >
+    </div>
+
+    <!-- Email -->
+    <div class="form-control mb-4">
+      <label class="label" for="email">Email</label>
+      <input type="email" name="email" id="email" class="input input-bordered w-full" placeholder="Enter your email address" >
+    </div>
+
+    <!-- Address -->
+    <div class="form-control mb-4">
+      <label class="label" for="address">Address</label>
+      <textarea name="address" id="address" class="textarea textarea-bordered w-full" placeholder="Enter your address" ></textarea>
+    </div>
+
+    <!-- Hospital -->
+    <div class="form-control mb-4">
+      <label class="label" for="hospital">Hospital</label>
+      <input type="text" name="hospital" id="hospital" class="input input-bordered w-full" placeholder="Enter hospital name">
+    </div>
+
+    <!-- Needed By -->
+    <div class="form-control mb-4">
+      <label class="label" for="needed_by">Needed By</label>
+      <input type="date" name="needed_by" id="needed_by" class="input input-bordered w-full" required>
+    </div>
+
+    <!-- Urgency Level -->
+    <div class="form-control mb-4">
+      <label class="label" for="urgency">Urgency Level</label>
+      <select name="urgency" id="urgency" class="select select-bordered w-full" required>
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="modal-action">
+      <button type="submit" class="btn btn-primary">Submit Request</button>
+      <!-- Close button in the form -->
+      <button class="btn" type="button" onclick="my_modal_1.close()">Close</button>
+    </div>
+  </form>
+</div>
+</dialog>
+  
+<!-- Blood Donation Journey Section -->
+<section class="bg-base-100 py-8 lg:py-12">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">Your Blood Donation Journey</h2>
+    <div class="flex flex-col md:flex-row flex-wrap justify-center gap-6 md:gap-8">
+      <div class="step mb-6 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center">
+        <div class="step-icon bg-primary text-primary-content rounded-full w-16 h-16 flex items-center justify-center mb-4">
+          <span class="text-xl md:text-2xl font-semibold text-white">1</span>
+        </div>
+        <div class="step-content bg-primary text-primary-content p-4 rounded-lg shadow-md w-full h-64 flex flex-col justify-center items-center">
+          <h3 class="text-lg md:text-xl font-bold mb-2">Step 1: Registration</h3>
+          <p>Fill out a quick registration form and provide some basic information about yourself.</p>
+        </div>
+      </div>
+      <div class="step mb-6 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center">
+        <div class="step-icon bg-secondary text-secondary-content rounded-full w-16 h-16 flex items-center justify-center mb-4">
+          <span class="text-xl md:text-2xl font-semibold text-white">2</span>
+        </div>
+        <div class="step-content bg-secondary text-secondary-content p-4 rounded-lg shadow-md w-full h-64 flex flex-col justify-center items-center">
+          <h3 class="text-lg md:text-xl font-bold mb-2">Step 2: Book Appointment</h3>
+          <p>Book an appointment with our medical professionals by logging in to your account. We'll be in touch with you shortly.</p>
+        </div>
+      </div>
+      <div class="step mb-6 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center">
+        <div class="step-icon bg-accent text-accent-content rounded-full w-16 h-16 flex items-center justify-center mb-4">
+          <span class="text-xl md:text-2xl font-semibold text-white">3</span>
+        </div>
+        <div class="step-content bg-accent text-accent-content p-4 rounded-lg shadow-md w-full h-64 flex flex-col justify-center items-center">
+          <h3 class="text-lg md:text-xl font-bold mb-2">Step 3: Blood Donation</h3>
+          <p>After a health checkup for each pet, donate blood in a comfortable setting. The process is safe and quick, usually taking around 10 minutes.</p>
+        </div>
+      </div>
+      <div class="step mb-6 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center">
+        <div class="step-icon bg-neutral text-neutral-content rounded-full w-16 h-16 flex items-center justify-center mb-4">
+          <span class="text-xl md:text-2xl font-semibold text-white">4</span>
+        </div>
+        <div class="step-content bg-neutral text-neutral-content p-4 rounded-lg shadow-md w-full h-64 flex flex-col justify-center items-center">
+          <h3 class="text-lg md:text-xl font-bold mb-2">Step 4: Post-Donation Care</h3>
+          <p>Relax and enjoy a light refreshment. Our team will provide guidance on post-donation care.</p>
+        </div>
+      </div>
+      <div class="step mb-6 w-full md:w-1/2 lg:w-1/3 flex flex-col items-center">
+        <div class="step-icon bg-success text-success-content rounded-full w-16 h-16 flex items-center justify-center mb-4">
+          <span class="text-xl md:text-2xl font-semibold text-white">5</span>
+        </div>
+        <div class="step-content bg-success text-success-content p-4 rounded-lg shadow-md w-full h-64 flex flex-col justify-center items-center">
+          <h3 class="text-lg md:text-xl font-bold mb-2">Step 5: Impact</h3>
+          <p>Know that your pets donation is making a difference. You'll receive updates on how your pets blood helps those in need.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}
